@@ -1,0 +1,25 @@
+{
+  "name": "mydu-discord-account-claim",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build && docker build -t jericho1060/mydu-discord-account-claim:0.1.3 -t jericho1060/mydu-discord-account-claim:latest . && docker push jericho1060/mydu-discord-account-claim:0.1.3 && docker push jericho1060/mydu-discord-account-claim:latest",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.2",
+    "drizzle-orm": "^0.29.5",
+    "mongoose": "^8.6.2",
+    "nuxt": "^3.13.0",
+    "postgres": "^3.4.4",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^0.5.7",
+    "drizzle-kit": "^0.24.2"
+  }
+}
