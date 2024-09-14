@@ -12,6 +12,12 @@ export default defineEventHandler(async (event) => {
       fatal: false,
     })
   }
+  // allow connection for unclaimable accounts
+  const not_claimable_list = process.env.NOT_CLAIMABLE_ACCOUNTS?.split(',') ?? []
+  if (not_claimable_list.includes(username)) {
+    return 'ok'
+  }
+
   // check if linked
   const linked = await Account.findOne({ du_account_name: username })
   if (!linked) {
