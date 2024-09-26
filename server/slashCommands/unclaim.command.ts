@@ -1,11 +1,10 @@
 import { type CacheType, type Interaction, SlashCommandBuilder } from 'discord.js'
 import { Account } from '~~/server/models/mongo'
 import type { Command } from '~~/shared/command'
-import { claim } from '~/server/slashCommands/claim.command'
 
 const command = new SlashCommandBuilder()
-  .setName('claim')
-  .setDescription('List your linked accounts.')
+  .setName('unclaim')
+  .setDescription('Released an account you claimed before.')
   .addStringOption(option => option.setName('my_du_account').setDescription('Your MyDU account name').setRequired(true))
 
 const action = async (interaction: Interaction<CacheType>) => {
