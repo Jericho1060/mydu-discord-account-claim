@@ -21,18 +21,18 @@ You can optionally add a list of accounts, comma separated, that can't be claime
 
 ```yml
     mydu-discord-account-claim:
-      hostname: mydu-discord-account-claim
+      hostname: mydu-discord-account-claim # name used in the url to access the webhook
       image: jericho1060/mydu-discord-account-claim:latest
-      restart: always
+      restart: always # in case of a crash of the container, restart is asap
       environment:
-        - DISCORD_CLIENT_ID=<Discord_Client_ID>
-        - DISCORD_BOT_TOKEN=<Discord_Bot_Token>
-        - DISCORD_SERVER_ID=<Discord_Server_Id>
-        - MAX_ACCOUNTS=<Max_Accounts>
-        - NOT_CLAIMABLE_ACCOUNTS=admin
+        - DISCORD_CLIENT_ID=<Discord_Client_ID> # Discord Client ID
+        - DISCORD_BOT_TOKEN=<Discord_Bot_Token> # Discord bot Secret Token
+        - DISCORD_SERVER_ID=<Discord_Server_Id> # You discord server ID, set it to protect from admin commands to be used from another server
+        - MAX_ACCOUNTS=<Max_Accounts> # set this value as to limit the number of MyDU account a discord account can claim 
+        - NOT_CLAIMABLE_ACCOUNTS=admin # list of account, comma separated, than can't be claimed. These accounts don't need a claim to login on the MyDU Server
       networks:
         vpcbr:
-          ipv4_address: 10.5.0.21
+          ipv4_address: 10.5.0.21 # This address must be unique between all containers, you can change this value
 ```
 
 Then, add the container to the startup script in `/scripts/up.sh` on linux or `/scripts/up.bat` on windows.

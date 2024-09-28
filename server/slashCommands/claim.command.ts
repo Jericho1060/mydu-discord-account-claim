@@ -1,4 +1,4 @@
-import { type CacheType, type Interaction, SlashCommandBuilder } from 'discord.js'
+import { type CommandInteraction, SlashCommandBuilder } from 'discord.js'
 import { eq } from 'drizzle-orm'
 import { Account } from '~~/server/models/mongo'
 import { auth } from '~~/server/models/postgres'
@@ -9,7 +9,7 @@ const command = new SlashCommandBuilder()
   .setDescription('List your linked accounts.')
   .addStringOption(option => option.setName('my_du_account').setDescription('Your MyDU account name').setRequired(true))
 
-const action = async (interaction: Interaction<CacheType>) => {
+const action = async (interaction: CommandInteraction) => {
   // check if the user has already linked the max amount of accounts
   const accounts = await Account.find({ provider_id: interaction.user.id })
   if (accounts.length >= Number.parseInt(process.env.MAX_ACCOUNTS as string)) {
@@ -17,7 +17,7 @@ const action = async (interaction: Interaction<CacheType>) => {
     return
   }
   // check if the acount is already linked
-  const mydu_account_name = interaction.options.getString('my_du_account')
+  const mydu_account_name = interaction.options.get('my_du_account') as string | undefined | null
   if (!mydu_account_name) {
     await interaction.reply({ content: 'Please provide a MyDU account name.', ephemeral: true })
     return

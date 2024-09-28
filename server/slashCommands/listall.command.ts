@@ -1,5 +1,5 @@
 import { setTimeout } from 'node:timers/promises'
-import { type CacheType, type Interaction, SlashCommandBuilder, PermissionsBitField } from 'discord.js'
+import { type CommandInteraction, SlashCommandBuilder, PermissionsBitField } from 'discord.js'
 import { Account } from '~/server/models/mongo'
 import type { Command } from '~~/shared/command'
 
@@ -12,20 +12,27 @@ const command = new SlashCommandBuilder()
   .setName('listall')
   .setDescription('List all linked accounts.')
 
-const action = async (interaction: Interaction<CacheType>) => {
+const action = async (interaction: CommandInteraction) => {
   // reject if the user is not admin of the server
-  console.log('checking admin')
-  if (!interaction.member?.permissions.has(PermissionsBitField.Flags.Administrator)) {
+  const member = interaction.member
+  if (!member) {
+    console.error('member not found')
+    return
+  }
+  const m_permissions = member.permissions as Readonly<PermissionsBitField>
+  if (!m_permissions) {
+    console.error('permissions not found')
+    return
+  }
+  if (!m_permissions.has(PermissionsBitField.Flags.Administrator)) {
     await interaction.reply({ content: 'You must be an admin to use this command.', ephemeral: true })
     return
   }
-  console.log('get all linked accounts from database.')
   const accounts = await Account.find({ })
   if (accounts.length === 0) {
     await interaction.reply({ content: 'Not any account linked yet.', ephemeral: true })
     return
   }
-  console.log('group by discord id')
   // group accounts in to LinkedAccount based on provider_id
   const linkedAccounts: { [key: string]: LinkedAccounts } = {}
   accounts.forEach((a) => {
@@ -43,7 +50,7 @@ const action = async (interaction: Interaction<CacheType>) => {
     const accountNames = a.du_account_names.join(', ')
     return `<@${a.provider_id}>: ${accountNames}`
   })
-  // each message must be 2000 characters or less in discord
+  // each message must be 2000 characters or fewer in discord
   const MAX_MESSAGE_LENGTH = 2000
   const messageSections = []
   let currentSection = ''
