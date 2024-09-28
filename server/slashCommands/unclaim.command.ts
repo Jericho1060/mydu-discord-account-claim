@@ -13,8 +13,9 @@ const action = async (interaction: CommandInteraction) => {
     return
   }
   // check if the user has already linked the max amount of accounts
-  const mydu_account_name = interaction.options.get('my_du_account')
+  const mydu_account_name = interaction.options.getString('my_du_account')
   const claims = await Account.find({ provider_id: interaction.user.id, du_account_name: mydu_account_name })
+  console.log(claims)
   if (claims.length === 0) {
     await interaction.reply({ content: 'Claim not found, nothing was deleted.', ephemeral: true })
     return
@@ -25,9 +26,9 @@ const action = async (interaction: CommandInteraction) => {
   await interaction.reply({ content: 'Account successfully unclaimed.', ephemeral: true })
 }
 
-const claim = {
+const unclaim = {
   command,
   action,
 } as Command
 
-export { claim }
+export { unclaim }

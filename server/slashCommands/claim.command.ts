@@ -17,7 +17,7 @@ const action = async (interaction: CommandInteraction) => {
     return
   }
   // check if the acount is already linked
-  const mydu_account_name = interaction.options.get('my_du_account') as string | undefined | null
+  const mydu_account_name = interaction.options.getString('my_du_account')
   if (!mydu_account_name) {
     await interaction.reply({ content: 'Please provide a MyDU account name.', ephemeral: true })
     return
