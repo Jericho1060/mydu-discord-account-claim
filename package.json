@@ -2,7 +2,7 @@
   "name": "mydu-discord-account-claim",
   "private": true,
   "type": "module",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "scripts": {
     "release": "npm version patch --force && npm run build && npm run docker-push",
     "build": "nuxt build && npm run docker-build",
