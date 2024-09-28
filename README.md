@@ -34,7 +34,7 @@ You can optionally add a list of accounts, comma separated, that can't be claime
         - DISCORD_SERVER_ID=<Discord_Server_Id> # You discord server ID, set it to protect from admin commands to be used from another server
         - MAX_ACCOUNTS=<Max_Accounts> # set this value as to limit the number of MyDU account a discord account can claim 
         - ALLOW_UNCLAIM_FOR_ALL=false # must be true to allow any user to unclaim an account at any moment
-        - NOT_CLAIMABLE_ACCOUNTS=admin # list of account, comma separated, than can't be claimed. You also need to add any bot from other mods here. These accounts don't need a claim to login on the MyDU Server. These names are from the "users" menu of the BO, not from the "players" menu,
+        - NOT_CLAIMABLE_ACCOUNTS=admin # list of account, comma separated, than can't be claimed. You also need to add any bot from other mods here. These accounts don't need a claim to login on the MyDU Server. These names are from the "users" menu of the BO, not from the "players" menu.
       networks:
         vpcbr:
           ipv4_address: 10.5.0.21 # This address must be unique between all containers, you can change this value
