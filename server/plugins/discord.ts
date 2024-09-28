@@ -32,6 +32,9 @@ export default async (_nitroApp: Nitro) => {
   client.on('ready', () => {
     console.log(`Logged in as ${client?.user?.tag}!`)
     console.log(`Invite me to your server: https://discord.com/oauth2/authorize?client_id=${clientId}&scope=applications.commands%20bot&permissions=${permissions}`)
+    if (process.env.DEBUGLOG) {
+      console.log('DEBUG MODE ENABLED')
+    }
   })
 
   client.on('interactionCreate', async (interaction) => {

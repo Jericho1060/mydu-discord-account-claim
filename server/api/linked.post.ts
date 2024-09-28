@@ -2,7 +2,7 @@ import { Account } from '~/server/models/mongo'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
-  const debug = process.env.DEBUG ?? false
+  const debug = process.env.DEBUGLOG ?? false
   if (debug) {
     console.log(body)
   }
