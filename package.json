@@ -2,7 +2,7 @@
   "name": "mydu-discord-account-claim",
   "private": true,
   "type": "module",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "scripts": {
     "build": "npm version patch --force && nuxt build && docker build -t jericho1060/mydu-discord-account-claim:%npm_package_version% -t jericho1060/mydu-discord-account-claim:latest . ",
     "dev": "nuxt dev",
