@@ -43,6 +43,7 @@ export default async (_nitroApp: Nitro) => {
     // security to lock access of the commands on a spécific server id
     if (process.env.DISCORD_SERVER_ID !== undefined && process.env.DISCORD_SERVER_ID !== interaction.guildId) {
       interaction.reply({ content: 'The use of this bot is not allowed on that server', ephemeral: true })
+      return
     }
 
     for (const command of commands as Command[]) {
