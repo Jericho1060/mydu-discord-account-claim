@@ -41,7 +41,7 @@ export default async (_nitroApp: Nitro) => {
     if (!interaction.isChatInputCommand()) return
 
     // security to lock access of the commands on a spécific server id
-    if (process.env.DISCORD_SERVER_ID !== undefined && process.env.DISCORD_SERVER_ID !== interaction.guildId) {
+    if (process.env.DISCORD_SERVER_ID !== undefined && process.env.DISCORD_SERVER_ID?.toString() !== interaction.guildId?.toString()) {
       interaction.reply({ content: 'The use of this bot is not allowed on that server', ephemeral: true })
       return
     }
