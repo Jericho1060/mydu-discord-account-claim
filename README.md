@@ -19,7 +19,7 @@ Add the container to the Docker stack:
 
 In `docker-compose.yml` add the following container and replace `<Discord_Client_ID>` and `<Discord_Bot_Token>` with the values you got from the Discord developer portal. You can also replace `<Max_Accounts>` with the maximum number of accounts a player can claim.
 
-Replace `Discord_Server_Id` by the ID of your discord server or the commands will be usable on another server if someone invite it somewhere else. If you don't know how to get your server ID, refer to this official article in the Discord Documentation: https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID
+Replace `Discord_Server_Id` by the ID of your discord server or the commands will be usable on another server if someone invite it somewhere else or directly by DM to the bot. If you don't know how to get your server ID, refer to this official article in the Discord Documentation: https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID
 
 You can optionally add a list of accounts, comma separated, that can't be claimed by the players. This is useful to prevent the claim of the admin account for example. If you don't want to block any account, you can remove the `NOT_CLAIMABLE_ACCOUNTS` line. These accounts will always be able to login, even if they are not claimed. (from the `Users` menu of the BO not from `Players`)
 
@@ -31,7 +31,7 @@ You can optionally add a list of accounts, comma separated, that can't be claime
       environment:
         - DISCORD_CLIENT_ID=<Discord_Client_ID> # Discord Client ID
         - DISCORD_BOT_TOKEN=<Discord_Bot_Token> # Discord bot Secret Token
-        - DISCORD_SERVER_ID=<Discord_Server_Id> # You discord server ID, set it to protect from admin commands to be used from another server
+        - DISCORD_SERVER_ID=<Discord_Server_Id> # You discord server ID, set it to protect from admin commands to be used from another server or by DM to the bot
         - MAX_ACCOUNTS=<Max_Accounts> # set this value as to limit the number of MyDU account a discord account can claim 
         - ALLOW_UNCLAIM_FOR_ALL=false # must be true to allow any user to unclaim an account at any moment
         - NOT_CLAIMABLE_ACCOUNTS=admin # list of account, comma separated, than can't be claimed. You also need to add any bot from other mods here. These accounts don't need a claim to login on the MyDU Server. These names are from the "users" menu of the BO, not from the "players" menu.
