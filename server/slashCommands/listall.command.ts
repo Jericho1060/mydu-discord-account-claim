@@ -1,7 +1,7 @@
 import { setTimeout } from 'node:timers/promises'
 import { type CommandInteraction, SlashCommandBuilder, PermissionsBitField, MessageFlags } from 'discord.js'
 import { Account } from '../models/mongo'
-import type { Command } from '../../shared/command'
+import type { Command } from '#shared/command'
 
 interface LinkedAccounts {
   provider_id: string

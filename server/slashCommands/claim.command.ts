@@ -2,7 +2,7 @@ import { type CommandInteraction, SlashCommandBuilder, MessageFlags } from 'disc
 import { eq } from 'drizzle-orm'
 import { Account } from '../models/mongo'
 import { auth } from '../models/postgres'
-import type { Command } from '../../shared/command'
+import type { Command } from '#shared/command'
 
 const command = new SlashCommandBuilder()
   .setName('claim')

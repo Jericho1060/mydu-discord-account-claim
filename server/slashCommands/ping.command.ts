@@ -1,5 +1,5 @@
 import { type CommandInteraction, SlashCommandBuilder, MessageFlags } from 'discord.js'
-import type { Command } from '../../shared/command'
+import type { Command } from '#shared/command'
 
 const command = new SlashCommandBuilder()
   .setName('ping')

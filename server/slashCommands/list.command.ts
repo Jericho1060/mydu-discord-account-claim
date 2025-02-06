@@ -1,6 +1,6 @@
 import { type CommandInteraction, SlashCommandBuilder, MessageFlags } from 'discord.js'
 import { Account } from '../models/mongo'
-import type { Command } from '../../shared/command'
+import type { Command } from '#shared/command'
 
 const command = new SlashCommandBuilder()
   .setName('list')
