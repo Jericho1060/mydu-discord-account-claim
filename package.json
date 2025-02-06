@@ -14,10 +14,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "discord.js": "^14.16.2",
+    "discord.js": "^14.17.3",
     "drizzle-orm": "^0.29.5",
     "mongoose": "^8.6.2",
-    "nuxt": "^3.13.2",
+    "nuxt": "^3.15.4",
     "postgres": "^3.4.4",
     "vue": "latest",
     "vue-router": "latest"

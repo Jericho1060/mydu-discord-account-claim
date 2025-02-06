@@ -1,7 +1,7 @@
 import { setTimeout } from 'node:timers/promises'
-import { type CommandInteraction, SlashCommandBuilder, PermissionsBitField } from 'discord.js'
-import { Account } from '~/server/models/mongo'
-import type { Command } from '~~/shared/command'
+import { type CommandInteraction, SlashCommandBuilder, PermissionsBitField, MessageFlags } from 'discord.js'
+import { Account } from '../models/mongo'
+import type { Command } from '../../shared/command'
 
 interface LinkedAccounts {
   provider_id: string
@@ -25,12 +25,12 @@ const action = async (interaction: CommandInteraction) => {
     return
   }
   if (!m_permissions.has(PermissionsBitField.Flags.Administrator)) {
-    await interaction.reply({ content: 'You must be an admin to use this command.', ephemeral: true })
+    await interaction.reply({ content: 'You must be an admin to use this command.', flags: MessageFlags.Ephemeral })
     return
   }
   const accounts = await Account.find({ })
   if (accounts.length === 0) {
-    await interaction.reply({ content: 'Not any account linked yet.', ephemeral: true })
+    await interaction.reply({ content: 'Not any account linked yet.', flags: MessageFlags.Ephemeral })
     return
   }
   // group accounts in to LinkedAccount based on provider_id
@@ -69,11 +69,11 @@ const action = async (interaction: CommandInteraction) => {
   let first: boolean = true
   for (const section of messageSections) {
     if (first) {
-      await interaction.reply({ content: section, ephemeral: true })
+      await interaction.reply({ content: section, flags: MessageFlags.Ephemeral })
       first = false
     }
     else {
-      await interaction.followUp({ content: section, ephemeral: true })
+      await interaction.followUp({ content: section, flags: MessageFlags.Ephemeral })
     }
     await setTimeout(100)
   }

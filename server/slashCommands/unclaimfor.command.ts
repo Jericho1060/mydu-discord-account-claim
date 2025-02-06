@@ -1,6 +1,6 @@
-import { type CommandInteraction, SlashCommandBuilder, PermissionsBitField } from 'discord.js'
-import { Account } from '~~/server/models/mongo'
-import type { Command } from '~~/shared/command'
+import { type CommandInteraction, SlashCommandBuilder, PermissionsBitField, MessageFlags } from 'discord.js'
+import { Account } from '../models/mongo'
+import type { Command } from '../../shared/command'
 
 const command = new SlashCommandBuilder()
   .setName('unclaimfor')
@@ -21,7 +21,7 @@ const action = async (interaction: CommandInteraction) => {
     return
   }
   if (!m_permissions.has(PermissionsBitField.Flags.Administrator)) {
-    await interaction.reply({ content: 'You must be an admin to use this command.', ephemeral: true })
+    await interaction.reply({ content: 'You must be an admin to use this command.', flags: MessageFlags.Ephemeral })
     return
   }
   // check if the user has already linked the max amount of accounts
@@ -29,13 +29,13 @@ const action = async (interaction: CommandInteraction) => {
   const mydu_account_name = interaction.options.getString('my_du_account')
   const claims = await Account.find({ provider_id: discord_id, du_account_name: mydu_account_name })
   if (claims.length === 0) {
-    await interaction.reply({ content: 'Claim not found, nothing was deleted.', ephemeral: true })
+    await interaction.reply({ content: 'Claim not found, nothing was deleted.', flags: MessageFlags.Ephemeral })
     return
   }
 
   await Account.deleteOne({ provider_id: discord_id, du_account_name: mydu_account_name })
 
-  await interaction.reply({ content: 'Account successfully unclaimed.', ephemeral: true })
+  await interaction.reply({ content: 'Account successfully unclaimed.', flags: MessageFlags.Ephemeral })
 }
 
 const unclaimfor = {

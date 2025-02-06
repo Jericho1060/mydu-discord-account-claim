@@ -1,4 +1,4 @@
-import { type CommandInteraction, SlashCommandBuilder } from 'discord.js'
+import { type CommandInteraction, SlashCommandBuilder, MessageFlags } from 'discord.js'
 import { Account } from '~~/server/models/mongo'
 import type { Command } from '~~/shared/command'
 
@@ -9,7 +9,7 @@ const command = new SlashCommandBuilder()
 
 const action = async (interaction: CommandInteraction) => {
   if (!process.env.ALLOW_UNCLAIM_FOR_ALL || process.env.ALLOW_UNCLAIM_FOR_ALL === 'false') {
-    await interaction.reply({ content: '/unclaim is not allowed on this server, contact an administrator to /unclaim an account.', ephemeral: true })
+    await interaction.reply({ content: '/unclaim is not allowed on this server, contact an administrator to /unclaim an account.', flags: MessageFlags.Ephemeral })
     return
   }
   // check if the user has already linked the max amount of accounts
@@ -17,13 +17,13 @@ const action = async (interaction: CommandInteraction) => {
   const claims = await Account.find({ provider_id: interaction.user.id, du_account_name: mydu_account_name })
   console.log(claims)
   if (claims.length === 0) {
-    await interaction.reply({ content: 'Claim not found, nothing was deleted.', ephemeral: true })
+    await interaction.reply({ content: 'Claim not found, nothing was deleted.', flags: MessageFlags.Ephemeral })
     return
   }
 
   await Account.deleteOne({ provider_id: interaction.user.id, du_account_name: mydu_account_name })
 
-  await interaction.reply({ content: 'Account successfully unclaimed.', ephemeral: true })
+  await interaction.reply({ content: 'Account successfully unclaimed.', flags: MessageFlags.Ephemeral })
 }
 
 const unclaim = {
