@@ -24,9 +24,6 @@ USER node
 # Copy the rest of the source files into the image.
 COPY .output .output
 
-# Run the application.
-#RUN pm2 start ./ecosystem.config.js
-
 # Expose the port that the application listens on.
 EXPOSE 3000
 
